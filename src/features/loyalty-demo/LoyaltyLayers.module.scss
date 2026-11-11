@@ -1,0 +1,47 @@
+.layer {
+  position: absolute;
+  inset: 0;
+  border: 1px solid #ffffff70;
+  border-radius: 8px;
+  padding: 14px 20px;
+  box-shadow: 0 6px 18px #0003;
+  transition: transform 0.35s ease-out;
+}
+.layer > div {
+  position: absolute;
+  bottom: 12px;
+  left: 18px;
+  right: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  border-top: 1px solid #0004;
+  padding-top: 6px;
+  font-size: 10px;
+}
+.layer strong {
+  font-weight: 500;
+}
+.database {
+  background: #c9d7bd;
+  color: #17261c;
+  transform: translate(3%, calc(14px + 110px * var(--split))) rotate(2deg);
+}
+.business {
+  background: #e6b99b;
+  color: #36271e;
+  transform: translate(2%, calc(9px + 74px * var(--split))) rotate(1deg);
+}
+.api {
+  background: #b3b9ec;
+  color: #202443;
+  transform: translate(1%, calc(4px + 38px * var(--split))) rotate(0.5deg);
+}
+@media (max-width: 420px) {
+  .layer > div {
+    left: 12px;
+    right: 12px;
+    font-size: 9px;
+  }
+}

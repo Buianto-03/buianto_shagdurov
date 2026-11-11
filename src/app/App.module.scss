@@ -1,0 +1,17 @@
+.page {
+  width: min(100% - var(--page-gutter) * 2, var(--content-width));
+  margin-inline: auto;
+}
+.skip {
+  position: fixed;
+  z-index: 20;
+  top: 12px;
+  left: 12px;
+  padding: 12px 20px;
+  background: var(--color-accent);
+  color: var(--color-background);
+  transform: translateY(-160%);
+}
+.skip:focus {
+  transform: none;
+}

@@ -1,0 +1,60 @@
+.demo {
+  padding: clamp(18px, 3vw, 28px);
+  background: #222321;
+}
+.caption {
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  margin-bottom: 20px;
+}
+.variants {
+  display: flex;
+  gap: 4px;
+}
+.variants button {
+  min-height: 44px;
+  border: 1px solid var(--color-border);
+  background: none;
+  padding: 8px 20px;
+  font-size: 13px;
+}
+.variants button[aria-pressed='true'] {
+  background: var(--color-text);
+  color: #111;
+}
+.progress {
+  display: flex;
+  gap: 5px;
+  margin-block: 24px 16px;
+}
+.progress > span {
+  flex: 1;
+  height: 3px;
+  background: var(--color-border);
+}
+.progress > span[data-done] {
+  background: var(--color-accent);
+}
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 76px;
+  font-size: 20px;
+  letter-spacing: -0.025em;
+}
+.step > span {
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  letter-spacing: 0;
+}
+.advance {
+  min-height: 44px;
+  border: 0;
+  padding: 8px 0;
+  background: none;
+  color: var(--color-accent);
+  font-size: 13px;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}

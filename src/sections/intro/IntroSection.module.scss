@@ -1,0 +1,96 @@
+.intro {
+  min-height: calc(100svh - 78px);
+  padding-block: clamp(36px, 6vh, 80px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.location {
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.location > span {
+  width: 6px;
+  height: 6px;
+  background: var(--color-accent);
+  border-radius: 50%;
+}
+.intro h1 {
+  font-size: clamp(47px, 12.2vw, 190px);
+  letter-spacing: -0.077em;
+  line-height: 0.9;
+  font-weight: 600;
+  margin-block: clamp(40px, 6vh, 80px);
+}
+.intro h1 > span {
+  display: block;
+}
+.dot {
+  color: var(--color-accent);
+}
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 28px;
+}
+.role {
+  font-size: clamp(28px, 4.1vw, 62px);
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  line-height: 1.1;
+}
+.stack {
+  margin-top: 20px;
+  color: var(--color-text-secondary);
+  font-size: clamp(16px, 2vw, 28px);
+  letter-spacing: -0.025em;
+}
+.stack span {
+  display: block;
+}
+.explore {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  padding-block: 8px;
+  white-space: nowrap;
+}
+.explore > span {
+  border: 1px solid #777;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  font-size: 18px;
+}
+@media (max-width: 720px) {
+  .intro {
+    min-height: calc(92svh - 64px);
+    padding-block: 34px;
+  }
+  .intro h1 {
+    font-size: clamp(47px, 12.1vw, 87px);
+    margin-block: 45px;
+    line-height: 0.97;
+  }
+  .bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+  }
+}
+@media (max-height: 600px) and (min-width: 721px) {
+  .intro {
+    min-height: auto;
+  }
+  .intro h1 {
+    font-size: 10vw;
+    margin-block: 32px;
+  }
+}

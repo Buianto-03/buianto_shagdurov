@@ -1,15 +1,18 @@
 import { useEffect } from 'react'
 import { projects } from '../../content/projects'
+import { cancelCaseMotion, setCaseOpen } from './caseDisclosure'
 
 export function useCaseNavigation() {
   useEffect(() => {
     const frames = new Set<number>()
-    function open(hash: string) {
+    function open(hash: string, immediate = false) {
       const id = hash.slice(1)
       if (!projects.some((project) => project.id === id)) return
       const element = document.getElementById(id)
       if (!(element instanceof HTMLDetailsElement)) return
-      element.open = true
+      setCaseOpen(element, true, immediate, () => {
+        if (!immediate) element.scrollIntoView({ block: 'start', behavior: 'instant' })
+      })
       const frame = requestAnimationFrame(() => {
         frames.delete(frame)
         element.scrollIntoView({
@@ -48,10 +51,17 @@ export function useCaseNavigation() {
       )
         open(url.hash)
     }
-    onHashChange()
+    open(window.location.hash, true)
+    const media = matchMedia('(prefers-reduced-motion: reduce)')
+    const onMotionChange = () => {
+      if (media.matches) document.querySelectorAll('details').forEach(cancelCaseMotion)
+    }
+    media.addEventListener('change', onMotionChange)
     window.addEventListener('hashchange', onHashChange)
     document.addEventListener('click', onClick)
     return () => {
+      media.removeEventListener('change', onMotionChange)
+      document.querySelectorAll('details').forEach(cancelCaseMotion)
       window.removeEventListener('hashchange', onHashChange)
       document.removeEventListener('click', onClick)
       frames.forEach((frame) => cancelAnimationFrame(frame))

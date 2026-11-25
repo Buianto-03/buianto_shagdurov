@@ -1,6 +1,7 @@
 import { projects } from '../../content/projects'
 import { BookingDemo } from '../../features/booking-demo/BookingDemo'
 import { ReportCalculator } from '../../features/report-calculator/ReportCalculator'
+import { caseTarget, setCaseOpen } from './caseDisclosure'
 import { useCaseNavigation } from './useCaseNavigation'
 import styles from './CaseStudiesSection.module.scss'
 
@@ -16,7 +17,11 @@ export function CaseStudiesSection() {
       </div>
       {projects.map((project, index) => (
         <details key={project.id} id={project.id} className={styles.case}>
-          <summary>
+          <summary onClick={(event) => {
+            event.preventDefault()
+            const element = event.currentTarget.parentElement
+            if (element instanceof HTMLDetailsElement) setCaseOpen(element, !caseTarget(element))
+          }}>
             <span className={styles.number}>0{index + 1}</span>
             <span className={styles.title}>
               {project.title}
@@ -28,7 +33,7 @@ export function CaseStudiesSection() {
               {project.outcome.value}
               <small>{project.outcome.description}</small>
             </span>
-            <span className={styles.plus} aria-hidden="true" />
+            <span className={styles.plus} aria-hidden="true"><span>↗</span><span>−</span></span>
           </summary>
           <div className={styles.detail}>
             <div className={styles.copy}>

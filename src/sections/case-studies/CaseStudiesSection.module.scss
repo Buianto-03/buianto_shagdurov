@@ -66,6 +66,20 @@
 }
 .plus::after {
   content: '↗';
+  display: inline-block;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .plus::after {
+    transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .case:not([open]) summary:focus-visible .plus::after {
+    transform: translate(3px, -3px);
+  }
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .case:not([open]) summary:hover .plus::after {
+    transform: translate(3px, -3px);
+  }
 }
 .case[open] .plus::after {
   content: '−';

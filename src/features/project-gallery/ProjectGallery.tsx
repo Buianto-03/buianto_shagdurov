@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'react'
 import { projects } from '../../content/projects'
+import { useReveal } from '../../shared/hooks/useReveal'
 import { DataTerrain } from './DataTerrain'
 import { useProjectGallery } from './useProjectGallery'
 import styles from './ProjectGallery.module.scss'
@@ -9,6 +10,7 @@ export function ProjectGallery() {
     projects.length,
   )
   const current = projects[active]
+  const reveal = useReveal(stage)
   const manualStyle = manual
     ? ({
         '--shift': `${-active * 100}%`,
@@ -23,7 +25,7 @@ export function ProjectGallery() {
       data-manual={manual}
       style={manualStyle}
     >
-      <div ref={stage} className={styles.stage}>
+      <div ref={reveal} className={styles.stage}>
         <div className={styles.heading}>
           <h2 id="reel-title">Selected projects</h2>
           <span>Work index / 01—03</span>

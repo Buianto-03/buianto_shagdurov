@@ -1,8 +1,10 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, type RefObject } from 'react'
 import { useReducedMotion } from './useReducedMotion'
+import styles from './useReveal.module.scss'
 
-export function useReveal<T extends HTMLElement>() {
-  const ref = useRef<T>(null)
+export function useReveal<T extends HTMLElement>(target?: RefObject<T | null>) {
+  const ownRef = useRef<T>(null)
+  const ref = target ?? ownRef
   const revealed = useRef(false)
   const reduced = useReducedMotion()
   useEffect(() => {
@@ -12,18 +14,11 @@ export function useReveal<T extends HTMLElement>() {
       revealed.current = true
       return
     }
-    let animation: Animation | undefined
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry.isIntersecting) return
+        if (!entry.isIntersecting || revealed.current) return
         revealed.current = true
-        animation = element.animate(
-          [
-            { opacity: 0.55, transform: 'translateY(12px)' },
-            { opacity: 1, transform: 'none' },
-          ],
-          { duration: 450, easing: 'ease-out' },
-        )
+        element.classList.add(styles.enter)
         observer.disconnect()
       },
       { threshold: 0.08 },
@@ -31,8 +26,8 @@ export function useReveal<T extends HTMLElement>() {
     observer.observe(element)
     return () => {
       observer.disconnect()
-      animation?.cancel()
+      element.classList.remove(styles.enter)
     }
-  }, [reduced])
+  }, [reduced, ref])
   return ref
 }

@@ -103,3 +103,6 @@
   clip-path: inset(50%);
   white-space: nowrap;
 }
+@media (prefers-reduced-motion: no-preference) {
+  .card button { transition: background-color var(--motion-feedback), border-color var(--motion-feedback), color var(--motion-feedback), opacity var(--motion-feedback); }
+}

@@ -42,3 +42,26 @@
     font-size: 26px;
   }
 }
+.header nav a {
+  position: relative;
+  text-decoration: none;
+}
+.header nav a::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 8px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+.header nav a:focus-visible::after {
+  transform: scaleX(1);
+}
+@media (hover: hover) and (pointer: fine) {
+  .header nav a:hover { text-decoration: none; }
+  .header nav a:hover::after { transform: scaleX(1); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .header nav a::after { transition: transform var(--motion-feedback) var(--motion-ease); }
+}

@@ -19,6 +19,11 @@
   --color-accent: #d4ff83;
   --page-gutter: clamp(20px, 4vw, 72px);
   --content-width: 1440px;
+  --motion-feedback: 180ms;
+  --motion-transition: 260ms;
+  --motion-reveal: 450ms;
+  --motion-entrance: 640ms;
+  --motion-ease: cubic-bezier(0.16, 1, 0.3, 1);
   scroll-behavior: smooth;
 }
 * {

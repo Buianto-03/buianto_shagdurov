@@ -33,7 +33,7 @@ export function ProjectGallery() {
         <div className={styles.body}>
           <div className={styles.info}>
             <div className={styles.meter}>
-              <span>{String(active + 1).padStart(2, '0')}</span>
+              <span><span key={current.id} className={styles.number}>{String(active + 1).padStart(2, '0')}</span></span>
               <span>/ 03</span>
             </div>
             <div

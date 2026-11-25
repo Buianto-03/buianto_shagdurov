@@ -289,3 +289,13 @@
     padding-block: 10px;
   }
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  .number { display: inline-block; animation: numberIn var(--motion-feedback) var(--motion-ease); }
+  .nav button, .nav button > span { transition: color var(--motion-transition) var(--motion-ease); }
+  .reel[data-manual='true'] .track { transition: transform var(--motion-transition) var(--motion-ease); }
+}
+@keyframes numberIn {
+  from { opacity: 0; transform: translateY(0.1em); }
+  to { opacity: 1; transform: translateY(0); }
+}

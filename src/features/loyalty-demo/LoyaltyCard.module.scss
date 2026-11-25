@@ -106,3 +106,9 @@
 @media (prefers-reduced-motion: no-preference) {
   .card button { transition: background-color var(--motion-feedback), border-color var(--motion-feedback), color var(--motion-feedback), opacity var(--motion-feedback); }
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  .node, .steps li::after { transition: background-color 180ms, border-color 180ms; }
+  .card { transition: border-color 180ms; }
+  .card[data-stage='reward-credited'] { border-color: #d4ff83; }
+}

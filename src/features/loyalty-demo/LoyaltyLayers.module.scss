@@ -45,3 +45,8 @@
     font-size: 9px;
   }
 }
+
+.layer[data-active] { border-color: #d4ff83; }
+@media (prefers-reduced-motion: no-preference) {
+  .layer { transition: transform 0.35s ease-out, border-color 180ms; }
+}

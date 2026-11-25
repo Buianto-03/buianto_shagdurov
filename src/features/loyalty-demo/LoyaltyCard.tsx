@@ -1,5 +1,5 @@
 import { frontendCopy } from '../../content/projects'
-import { useLoyaltyDemo } from './useLoyaltyDemo'
+import type { LoyaltyStage } from './types'
 import styles from './LoyaltyCard.module.scss'
 
 const steps = ['Complete deal', 'Check rules', 'Credit reward']
@@ -16,10 +16,9 @@ const messages = {
   'reward-credited': 'Demo reward credited.',
 }
 
-export function LoyaltyCard() {
-  const { stage, running, run } = useLoyaltyDemo()
+export function LoyaltyCard({ stage, running, run }: { stage: LoyaltyStage; running: boolean; run: () => void }) {
   return (
-    <div className={styles.card}>
+    <div className={styles.card} data-stage={stage} data-layer="ui">
       <div className={styles.top}>
         <span>Frontend · React</span>
         <span aria-hidden="true">↗</span>

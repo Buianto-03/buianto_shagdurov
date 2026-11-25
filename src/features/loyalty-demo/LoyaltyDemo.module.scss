@@ -78,3 +78,16 @@
 @media (prefers-reduced-motion: no-preference) {
   .foot button { transition: background-color var(--motion-feedback), border-color var(--motion-feedback), color var(--motion-feedback), opacity var(--motion-feedback); }
 }
+
+.signal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 6;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #d4ff83;
+  opacity: 0;
+  pointer-events: none;
+}

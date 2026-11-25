@@ -1,3 +1,4 @@
+import type { LoyaltyStage } from './types'
 import styles from './LoyaltyLayers.module.scss'
 
 const layers = [
@@ -6,12 +7,14 @@ const layers = [
   { label: 'Rewards API', tech: 'NestJS', className: 'api' },
 ]
 
-export function LoyaltyLayers() {
+export function LoyaltyLayers({ stage, expanded }: { stage: LoyaltyStage; expanded: boolean }) {
   return (
     <>
       {layers.map((layer) => (
         <div
           key={layer.className}
+          data-layer={layer.className}
+          data-active={expanded && ((stage === 'deal-completed' && layer.className === 'api') || (stage === 'rules-checked' && (layer.className === 'business' || layer.className === 'database'))) ? '' : undefined}
           className={`${styles.layer} ${styles[layer.className]}`}
         >
           <div>

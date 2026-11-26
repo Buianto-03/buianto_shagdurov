@@ -4,6 +4,14 @@ export const profile = {
   name: 'Buianto Shagdurov',
   role: 'Full-stack Engineer',
   location: 'Belgrade, Serbia',
+  contact: {
+    email: 'buiantoshagdurov@gmail.com',
+    profiles: [
+      { label: 'LinkedIn', href: 'https://www.linkedin.com/in/buianto-shagdurov' },
+      { label: 'GitHub', href: 'https://github.com/Buianto-03' },
+      { label: 'Telegram', href: 'https://t.me/bnt_shgdrv' },
+    ],
+  },
   stackLines: ['React · TypeScript · Next.js', 'Node.js · NestJS · PostgreSQL'],
   languages: ['English · B2', 'Russian · Native'],
   lead: '5+ years building products across property technology, travel and industrial monitoring.',

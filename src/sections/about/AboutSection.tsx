@@ -1,16 +1,39 @@
+import { useEffect, useRef } from 'react'
 import { profile } from '../../content/profile'
-import { useReveal } from '../../shared/hooks/useReveal'
 import styles from './AboutSection.module.scss'
 
 export function AboutSection() {
-  const ref = useReveal<HTMLElement>()
+  const section = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    if (!section.current || typeof IntersectionObserver === 'undefined') return
+
+    const blocks = [...section.current.children]
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          entry.target.classList.replace(styles.waiting, styles.revealed)
+        } else {
+          entry.target.classList.remove(styles.revealed)
+          entry.target.classList.add(styles.waiting)
+        }
+      }
+    })
+
+    for (const block of blocks) {
+      observer.observe(block)
+    }
+
+    return () => {
+      observer.disconnect()
+      for (const block of blocks) {
+        block.classList.remove(styles.waiting, styles.revealed)
+      }
+    }
+  }, [])
+
   return (
-    <section
-      id="profile"
-      className={styles.about}
-      aria-labelledby="about-title"
-      ref={ref}
-    >
+    <section ref={section} id="profile" className={styles.about} aria-labelledby="about-title">
       <div className={styles.heading}>
         <h2 id="about-title">
           About <span>me.</span>

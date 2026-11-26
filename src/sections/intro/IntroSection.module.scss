@@ -52,6 +52,23 @@
 .stack span {
   display: block;
 }
+.contacts {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 18px;
+  margin-top: 10px;
+  font-size: 13px;
+}
+.contacts a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--color-text-secondary);
+}
+.contacts a:hover,
+.contacts a:focus-visible {
+  color: var(--color-accent);
+}
 .explore {
   display: flex;
   align-items: center;
@@ -80,14 +97,36 @@
   }
 }
 @media (prefers-reduced-motion: no-preference) {
+  .location,
+  .intro h1 > span,
+  .role,
+  .stack,
+  .contacts,
+  .explore {
+    animation: introEnter 800ms var(--motion-ease) var(--intro-delay, 0ms) backwards;
+  }
   .intro h1 > span {
-    animation: introEnter 560ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
+    --intro-delay: 90ms;
   }
   .intro h1 > span:nth-child(2) {
-    animation-delay: 80ms;
+    --intro-delay: 180ms;
   }
   .role {
-    animation: introEnter 480ms cubic-bezier(0.16, 1, 0.3, 1) 160ms backwards;
+    --intro-delay: 300ms;
+  }
+  .stack {
+    --intro-delay: 390ms;
+  }
+  .contacts {
+    --intro-delay: 480ms;
+  }
+  .explore {
+    --intro-delay: 560ms;
+  }
+  .contacts:focus-within,
+  .explore:focus {
+    animation-duration: 0s;
+    animation-delay: 0s;
   }
 }
 @media (max-width: 720px) {

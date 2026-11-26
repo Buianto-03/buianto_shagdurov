@@ -57,8 +57,44 @@
   font-size: 18px;
   font-weight: 400;
 }
+.timeline {
+  position: relative;
+  display: grid;
+  align-items: center;
+  min-height: 36px;
+  margin-top: 12px;
+  border: 1px solid #74786c;
+}
+.remaining {
+  position: absolute;
+  inset: 0;
+  background: var(--color-accent);
+  transform: scaleX(var(--remaining-share));
+  transform-origin: left;
+}
+.perReport {
+  position: relative;
+  margin-left: calc(var(--remaining-share) * 100%);
+  padding: 6px 8px;
+  text-align: center;
+  font-size: 12px;
+}
 .note {
   color: var(--color-text-secondary);
   font-size: 10px;
-  margin-top: 20px;
+  margin-top: 10px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .timeline[data-motion='waiting'] .remaining {
+    transform: scaleX(1);
+  }
+  .timeline[data-motion='waiting'] .perReport {
+    opacity: 0;
+  }
+  .timeline[data-motion='revealed'] .remaining {
+    transition: transform var(--motion-reveal) var(--motion-ease);
+  }
+  .timeline[data-motion='revealed'] .perReport {
+    transition: opacity 140ms ease 300ms;
+  }
 }

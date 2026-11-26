@@ -1,5 +1,6 @@
 import { projects } from '../../content/projects'
 import { BookingDemo } from '../../features/booking-demo/BookingDemo'
+import { LoyaltyDemo } from '../../features/loyalty-demo/LoyaltyDemo'
 import { ReportCalculator } from '../../features/report-calculator/ReportCalculator'
 import { caseTarget, setCaseOpen } from './caseDisclosure'
 import { useCaseNavigation } from './useCaseNavigation'
@@ -56,14 +57,7 @@ export function CaseStudiesSection() {
               </p>
             </div>
             {project.id === 'domclick' ? (
-              <div className={styles.widgetLink}>
-                <span>Interface → API → Logic → Data</span>
-                <p>
-                  A simplified view of the engineering behind an agent loyalty
-                  program.
-                </p>
-                <a href="#plate">Inspect the widget ↗</a>
-              </div>
+              <LoyaltyDemo />
             ) : project.id === 'tripster' ? (
               <BookingDemo />
             ) : (

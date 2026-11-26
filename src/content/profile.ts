@@ -15,18 +15,18 @@ export const profile = {
   experience: [
     {
       company: 'Domclick',
-      role: 'Full-stack product engineering',
-      period: 'PropTech',
+      role: 'Full-stack Engineer',
+      period: '2024 – present',
     },
     {
       company: 'Tripster',
-      role: 'Frontend Developer',
-      period: 'From Nov 2022 · 1 year 11 months',
+      role: 'Full-stack Engineer',
+      period: '2022 – 2024',
     },
     {
       company: 'SIBINTEK',
-      role: 'JavaScript Developer',
-      period: 'May 2021 — Nov 2022',
+      role: 'Frontend Engineer',
+      period: '2021 – 2022',
     },
   ],
   highlights: [
@@ -62,11 +62,11 @@ export const profile = {
     { label: 'APIs & real time', value: 'REST · GraphQL · WebSockets' },
     {
       label: 'Quality & delivery',
-      value: 'Jest · Cypress · TDD · Docker · GitHub Actions · CI/CD',
+      value: 'Jest · Cypress · TDD · Docker · GitHub · CI/CD',
     },
     {
       label: 'AI-assisted development',
-      value: 'GitHub Copilot · ChatGPT · Claude Code',
+      value: 'GitHub Copilot · OpenAI Codex · Claude Code',
     },
   ],
 }

@@ -1,7 +1,7 @@
 import type { Project } from './types'
 
 export const frontendCopy =
-  'I built the React UI, including complex forms, validation and the client-side business logic behind the agent workflow.'
+  'I designed the React frontend architecture for the agent loyalty widget.'
 
 export const projects: Project[] = [
   {
@@ -10,13 +10,13 @@ export const projects: Project[] = [
     company: 'Domclick',
     domain: 'PropTech',
     summary:
-      'An agent loyalty program built end to end, from the React interface to the NestJS API and PostgreSQL schema.',
+      'An agent loyalty widget I co-developed end to end, from the React interface to the NestJS API and PostgreSQL schema.',
     responsibilities: [
       frontendCopy,
-      'Built the NestJS API, reward rules and PostgreSQL data model behind the loyalty workflow.',
+      'Designed the REST API, NestJS modules and PostgreSQL schema for the loyalty widget.',
     ],
     stack: ['React', 'TypeScript', 'NestJS', 'PostgreSQL'],
-    outcome: { value: '+10%', description: 'agent deals' },
+    outcome: { value: '+10%', description: 'agent-submitted deals' },
     image: '/images/architecture.webp',
     imageAlt:
       'Sunlit concrete balconies on an apartment building, illustrating the PropTech domain',
@@ -27,12 +27,11 @@ export const projects: Project[] = [
     company: 'Tripster',
     domain: 'TravelTech',
     summary:
-      'A redesigned booking journey, supported by A/B testing and frontend performance work.',
+      'A multi-step booking flow improved through iterative redesign and A/B testing.',
     responsibilities: [
       'Worked on the booking interface and A/B tests to improve the path to a confirmed booking.',
-      'Worked on frontend performance alongside the redesigned booking journey.',
     ],
-    stack: ['Frontend', 'A/B testing', 'Performance'],
+    stack: ['Frontend', 'A/B testing'],
     outcome: { value: '2×', description: 'conversion' },
     image: '/images/journey.webp',
     imageAlt:
@@ -40,15 +39,15 @@ export const projects: Project[] = [
   },
   {
     id: 'reports-case',
-    title: 'Report engine',
-    company: 'Reporting',
+    title: 'Reporting module',
+    company: 'SIBINTEK',
     domain: 'Enterprise analytics',
     summary:
-      'Industrial reporting that brought generation time down from two hours to fifteen minutes per report.',
+      'An internal reporting and analytics module that cut manual report preparation time from two hours to fifteen minutes.',
     responsibilities: [
-      'Improved report generation, reducing the time needed to produce operational reports.',
+      'Built a module that combined data from multiple corporate sources and provided automated dashboards.',
     ],
     stack: ['Reporting', 'Enterprise analytics'],
-    outcome: { value: '2h → 15m', description: 'per report' },
+    outcome: { value: '2h → 15m', description: 'report preparation' },
   },
 ]

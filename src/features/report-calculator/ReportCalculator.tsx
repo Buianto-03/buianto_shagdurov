@@ -1,15 +1,41 @@
-import { useId, useState } from 'react'
+import { useEffect, useId, useRef, useState, type CSSProperties } from 'react'
 import styles from './ReportCalculator.module.scss'
 
+const minutesBefore = 120
+const minutesAfter = 15
+const minutesSaved = minutesBefore - minutesAfter
+
 function formatMinutes(minutes: number) {
+  const hours = Math.floor(minutes / 60)
   const remainder = minutes % 60
-  return `${Math.floor(minutes / 60)}h${remainder ? ` ${remainder}m` : ''}`
+  if (!hours) return `${remainder}m`
+  return remainder ? `${hours}h ${remainder}m` : `${hours}h`
 }
 
 export function ReportCalculator() {
   const [count, setCount] = useState(5)
   const id = useId()
-  const saved = formatMinutes(count * (120 - 15))
+  const timeline = useRef<HTMLDivElement>(null)
+  const revealed = useRef(false)
+  const saved = formatMinutes(count * minutesSaved)
+
+  useEffect(() => {
+    const bar = timeline.current
+    if (!bar || revealed.current || typeof IntersectionObserver === 'undefined') return
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting || entry.intersectionRatio < 0.9) return
+      revealed.current = true
+      bar.dataset.motion = 'revealed'
+      observer.disconnect()
+    }, { threshold: 0.9 })
+    bar.dataset.motion = 'waiting'
+    observer.observe(bar)
+    return () => {
+      observer.disconnect()
+      delete bar.dataset.motion
+    }
+  }, [])
+
   return (
     <div className={styles.calculator}>
       <label htmlFor={id}>
@@ -36,13 +62,23 @@ export function ReportCalculator() {
       </p>
       <div className={styles.comparison}>
         <span>
-          Before <strong>{formatMinutes(count * 120)}</strong>
+          Before <strong>{formatMinutes(count * minutesBefore)}</strong>
         </span>
         <span>
-          After <strong>{formatMinutes(count * 15)}</strong>
+          After <strong>{formatMinutes(count * minutesAfter)}</strong>
         </span>
       </div>
-      <p className={styles.note}>Based on 120 → 15 minutes per report.</p>
+      <div
+        ref={timeline}
+        className={styles.timeline}
+        style={{ '--remaining-share': minutesAfter / minutesBefore } as CSSProperties}
+      >
+        <span className={styles.remaining} aria-hidden="true" />
+        <span className={styles.perReport}>{formatMinutes(minutesSaved)} saved per report</span>
+      </div>
+      <p className={styles.note}>
+        Preparation time per report fell from {minutesBefore} to {minutesAfter} minutes.
+      </p>
     </div>
   )
 }

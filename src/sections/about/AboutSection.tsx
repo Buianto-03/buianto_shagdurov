@@ -24,7 +24,7 @@ export function AboutSection() {
             <br />
             {profile.lastName}
           </h3>
-          <p className={styles.role}>Full-stack JavaScript engineer</p>
+          <p className={styles.role}>{profile.role}</p>
           <p className={styles.languages}>
             {profile.languages.map((line) => (
               <span key={line}>{line}</span>

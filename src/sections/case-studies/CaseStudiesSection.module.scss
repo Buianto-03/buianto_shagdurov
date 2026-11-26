@@ -130,26 +130,6 @@
   font-weight: 400;
   letter-spacing: -0.03em;
 }
-.widgetLink {
-  border: 1px solid var(--color-border);
-  padding: 28px;
-}
-.widgetLink > span {
-  color: var(--color-accent);
-  font-size: 11px;
-}
-.widgetLink p {
-  font-size: 22px;
-  letter-spacing: -0.035em;
-  margin-block: 18px 28px;
-}
-.widgetLink a {
-  display: inline-block;
-  padding-block: 12px;
-  font-size: 13px;
-  text-decoration: underline;
-  text-underline-offset: 5px;
-}
 @media (max-width: 720px) {
   .section {
     padding-block: 32px 48px;

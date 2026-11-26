@@ -1,19 +1,18 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import styles from './BookingDemo.module.scss'
 
+const stages = {
+  tour: { label: 'Tour', instruction: 'Pick a tour' },
+  departure: { label: 'Departure', instruction: 'Select a departure' },
+  review: { label: 'Review', instruction: 'Review the booking' },
+  confirmed: { label: 'Confirmed', instruction: 'Booking confirmed' },
+} as const
+
+type Stage = keyof typeof stages
 const flows = {
-  before: [
-    'Pick a tour',
-    'Select a departure',
-    'Review the booking',
-    'Booking confirmed',
-  ],
-  after: [
-    'Pick a tour and departure',
-    'Review the booking',
-    'Booking confirmed',
-  ],
-}
+  before: ['tour', 'departure', 'review', 'confirmed'],
+  after: ['tour', 'review', 'confirmed'],
+} as const satisfies Record<string, readonly Stage[]>
 type Flow = keyof typeof flows
 
 export function BookingDemo() {
@@ -35,16 +34,21 @@ export function BookingDemo() {
     group.querySelectorAll('button').forEach((button) => observer.observe(button))
     return () => observer.disconnect()
   }, [flow])
-  const steps = flows[flow]
+  const steps: readonly Stage[] = flows[flow]
+  const current = steps[step]
+  const combined = flow === 'after'
+  const instruction = combined && current === 'tour'
+    ? 'Pick a tour and departure'
+    : stages[current].instruction
   const finished = step === steps.length - 1
   function select(value: Flow) {
     setFlow(value)
     setStep(0)
   }
   return (
-    <div className={styles.demo}>
+    <div className={styles.demo} data-flow={flow}>
       <p className={styles.caption}>
-        Illustrative interaction · simplified booking flow
+        Illustrative comparison of booking flows
       </p>
       <div
         className={styles.variants}
@@ -67,15 +71,37 @@ export function BookingDemo() {
           After
         </button>
       </div>
-      <div className={styles.progress} aria-hidden="true">
-        {steps.map((label, index) => (
-          <span key={label} data-done={index <= step ? '' : undefined} />
-        ))}
-      </div>
+      <ol className={styles.route} role="list" aria-label="Booking steps">
+        {flows.before.map((id) => {
+          const index = steps.indexOf(id)
+          const merged = index === -1
+          return (
+            <li
+              key={id}
+              className={styles.routeStep}
+              data-stage={id}
+              data-merged={merged ? '' : undefined}
+              data-reached={index >= 0 && index <= step ? '' : undefined}
+              aria-hidden={merged || undefined}
+              aria-current={id === current ? 'step' : undefined}
+            >
+              <span className={styles.marker} aria-hidden="true" />
+              <span className={styles.routeLabel}>
+                {stages[id].label}
+                {id === 'tour' && (
+                  <span className={styles.combined} aria-hidden={!combined}>
+                    {' + departure'}
+                  </span>
+                )}
+              </span>
+            </li>
+          )
+        })}
+      </ol>
       <p className={styles.step} aria-live="polite" aria-atomic="true">
+        <span className={styles.stepCount}>Step {step + 1} of {steps.length}</span>
         <span key={`${flow}-${step}`} className={styles.stepContent}>
-          <span>{step + 1} / {steps.length}</span>
-          {steps[step]}
+          {instruction}
         </span>
       </p>
       <button
